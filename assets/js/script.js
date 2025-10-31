@@ -1,4 +1,5 @@
 // 1. FUNÇÃO PRINCIPAL PARA ALTERNAR O MENU
+console.log("JavaScript Carregado com Sucesso!");
 function toggleMenu() {
     
     const nav = document.querySelector('nav');
