@@ -58,5 +58,4 @@ O projeto está hospedado publicamente no GitHub Pages, permitindo a visualizaç
 **Marcelo Santos**
 * **GitHub:** [MarceloSantos95](https://github.com/MarceloSantos95)
 
-**Marcelo Santos**
-* **GitHub:** [MarceloSantos95](https://github.com/MarceloSantos95)
+
