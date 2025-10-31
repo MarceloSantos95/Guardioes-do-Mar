@@ -1,22 +1,21 @@
 // 1. FUNÇÃO PRINCIPAL PARA ALTERNAR O MENU
-console.log("JavaScript Carregado com Sucesso!");
-function toggleMenu() {
-    
-    const nav = document.querySelector('nav');
-    
-    
-    const body = document.body;
-
-    
-    nav.classList.toggle('menu-aberto');
-    
-    
-    body.classList.toggle('no-scroll'); 
-}
 
 
-const menuIcone = document.querySelector('.menu-hamburguer');
+document.addEventListener('DOMContentLoaded', function() {
+    
+    const menuIcone = document.querySelector('.menu-hamburguer');
+    const navMenu = document.querySelector('nav');
+    const bodyElement = document.body;
+    
+    function toggleMenu() {
+        
+        navMenu.classList.toggle('menu-aberto');
+        
+        
+        bodyElement.classList.toggle('no-scroll'); 
+    }
 
-if (menuIcone) {
-    menuIcone.addEventListener('click', toggleMenu);
-}
+    if (menuIcone) {
+        menuIcone.addEventListener('click', toggleMenu);
+    }
+});
