@@ -1,0 +1,449 @@
+:root {
+    --cor-primaria-azul: #004d99;
+    --cor-secundaria-verde: #00b36b;
+    --cor-acento-claro: #1aa3e2;
+    --cor-neutra-fundo: #f4f7f9;
+    --cor-neutra-clara: #ffffff;
+    --cor-neutra-escura: #2c3e50;
+    --cor-sucesso: #2ecc71;
+    --cor-erro: #e74c3c;
+    --fonte-padrao: 'Roboto', 'Arial', sans-serif;
+    --fonte-tamanho-h1: 3rem;
+    --fonte-tamanho-h2: 2.2rem;
+    --fonte-tamanho-h3: 1.6rem;
+    --fonte-tamanho-texto: 1rem;
+    --fonte-tamanho-pequeno: 0.85rem;
+    --espacamento-xs: 8px;
+    --espacamento-sm: 16px;
+    --espacamento-md: 24px;
+    --espacamento-lg: 32px;
+    --espacamento-xl: 48px;
+    --espacamento-xxl: 64px;
+    --breakpoint-sm: 576px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 992px;
+    --breakpoint-xl: 1200px;
+    --breakpoint-xxl: 1400px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--cor-neutra-fundo);
+    color: var(--cor-neutra-escura);
+    font-family: var(--fonte-padrao);
+    font-size: var(--fonte-tamanho-texto);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+}
+
+h1, h2, h3 {
+    margin-top: var(--espacamento-md);
+    margin-bottom: var(--espacamento-sm);
+    color: var(--cor-neutra-escura);
+}
+
+h1 { color: var(--cor-primaria-azul); font-weight: 700; }
+h3 { color: var(--cor-secundaria-verde); }
+
+a {
+    color: var(--cor-primaria-azul);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+a:hover {
+    color: var(--cor-acento-claro);
+    text-decoration: underline;
+}
+
+.container {
+    width: 90%;
+    max-width: var(--breakpoint-xl);
+    margin: 0 auto;
+    padding: 0 var(--espacamento-sm);
+}
+
+/* 1. LEIAUTE GERAL */
+header, footer, main {
+    grid-column: 1 / -1;
+}
+
+main {
+    padding: var(--espacamento-xl) 0;
+}
+
+/* 2. NAVEGAÇÃO E HEADER */
+header {
+    background-color: var(--cor-neutra-clara);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: var(--espacamento-sm) var(--espacamento-md);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header img {
+    height: 45px;
+    transition: transform 0.3s ease;
+}
+header img:hover {
+    transform: scale(1.05);
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: var(--espacamento-md);
+}
+
+nav ul li a {
+    color: var(--cor-neutra-escura);
+    font-weight: 600;
+    position: relative;
+}
+
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--cor-secundaria-verde);
+    transition: width 0.3s ease;
+}
+
+nav ul li a:hover::after {
+    width: 100%;
+}
+
+.menu-hamburguer { display: none; }
+
+/* HERO BANNER */
+.hero-banner {
+    background-image: url('../imagens/Tartaruga_Nadando.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 450px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+.hero-banner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.55);
+    z-index: 2;
+}
+
+.hero-content {
+    color: var(--cor-neutra-clara);
+    z-index: 3;
+    position: relative;
+    max-width: 700px;
+}
+
+.hero-content h1 {
+    color: var(--cor-neutra-clara);
+    font-size: var(--fonte-tamanho-h1);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: var(--espacamento-lg);
+}
+
+/* 3. COMPONENTES: BOTÕES */
+.btn {
+    padding: var(--espacamento-sm) var(--espacamento-lg);
+    border-radius: 20px;
+    font-size: var(--fonte-tamanho-texto);
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.btn-primary {
+    background-color: var(--cor-primaria-azul);
+    color: var(--cor-neutra-clara);
+    box-shadow: 0 4px 6px rgba(0, 77, 153, 0.3);
+}
+
+.btn-primary:hover, .btn-primary:focus {
+    background-color: #0066cc;
+    transform: translateY(-2px);
+}
+
+.btn-primary:active {
+    background-color: #004085;
+}
+
+.btn-secondary {
+    background-color: var(--cor-secundaria-verde);
+    color: var(--cor-neutra-clara);
+    box-shadow: 0 4px 6px rgba(0, 179, 107, 0.3);
+}
+.btn-secondary:hover {
+    background-color: #008850;
+    transform: translateY(-2px);
+}
+
+.btn:disabled {
+    background-color: var(--cor-neutra-escura);
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* 4. MEDIA QUERIES (RESPONSIVIDADE) - Corrigido para Validação */
+@media (min-width: 768px) {
+    nav { display: block; }
+    .menu-hamburguer { display: none; }
+}
+
+@media (min-width: 992px) {
+    body {
+        grid-template-columns: repeat(12, 1fr);
+    }
+    main {
+        grid-column: 2 / 12;
+    }
+}
+
+/* 5. ESTILIZAÇÃO DE FORMULÁRIOS E FEEDBACK */
+fieldset {
+    border: 1px solid #dcdcdc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    padding: var(--espacamento-lg);
+    margin-bottom: var(--espacamento-xl);
+    border-radius: 6px;
+    background-color: var(--cor-neutra-clara);
+}
+
+legend {
+    color: var(--cor-primaria-azul);
+    font-size: var(--fonte-tamanho-h3);
+    padding: 0 var(--espacamento-xs);
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="date"],
+select {
+    width: 100%;
+    padding: var(--espacamento-xs);
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: var(--fonte-tamanho-texto);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input:focus, select:focus {
+    border-color: var(--cor-acento-claro);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(26, 163, 226, 0.3);
+}
+
+input:valid {
+    border-color: var(--cor-sucesso);
+}
+
+input:invalid {
+    border-color: var(--cor-erro);
+    border-width: 2px;
+}
+
+input:invalid:not(:focus):not(:placeholder-shown) {
+    border-width: 2px;
+}
+
+.alert {
+    padding: var(--espacamento-sm);
+    margin-bottom: var(--espacamento-md);
+    border: 1px solid transparent;
+    border-radius: 4px;
+    font-size: var(--fonte-tamanho-texto);
+}
+
+.alert-error {
+    font-weight: bold;
+    border-left: 5px solid var(--cor-erro);
+    background-color: #ffeaea;
+    color: var(--cor-erro);
+}
+
+/* 6. ESTILIZAÇÃO DE CARDS E CONTEÚDO */
+.projetos-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--espacamento-lg);
+    margin-bottom: var(--espacamento-xl);
+}
+
+@media (min-width: 992px) { /* Corrigido para Validação */
+    .projetos-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--espacamento-md);
+    }
+}
+
+.card-projeto {
+    background-color: var(--cor-neutra-clara);
+    border-radius: 10px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    transform: translateY(0);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.card-projeto:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.card-projeto img {
+    max-width: 95%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 8px;
+    display: block;
+    margin: 0 auto;
+    padding: var(--espacamento-sm) 0;
+}
+
+.card-content {
+    padding: var(--espacamento-md);
+    flex-grow: 1;
+    text-align: center;
+}
+
+.badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+    display: inline-block;
+    margin: 0 0 var(--espacamento-xs) 0;
+}
+
+.badge-conservacao {
+    background-color: var(--cor-secundaria-verde);
+    color: var(--cor-neutra-clara);
+}
+
+.badge-doacao {
+    background-color: var(--cor-acento-claro);
+    color: var(--cor-neutra-clara);
+}
+
+/* 6.5. ESTILIZAÇÃO DA SEÇÃO DE APOIO (#apoie) */
+.flex-apoio {
+    display: flex;
+    flex-direction: column;
+    gap: var(--espacamento-lg);
+    margin-top: var(--espacamento-md);
+}
+
+.card-apoio {
+    background-color: var(--cor-neutra-clara);
+    padding: var(--espacamento-lg);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+@media (min-width: 768px) { /* Corrigido para Validação */
+    .flex-apoio {
+        flex-direction: row;
+    }
+    .card-apoio {
+        flex: 1;
+    }
+}
+
+main > h1 {
+    text-align: center;
+}
+.projetos-grid h2:first-child,
+.projetos-grid p:first-of-type {
+    text-align: center;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* 7. ESTILIZAÇÃO DE FOOTER */
+footer {
+    background-color: var(--cor-neutra-escura);
+    color: #bdc3c7;
+    padding: var(--espacamento-md) 0;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+footer .container {
+    padding: var(--espacamento-md) var(--espacamento-sm);
+}
+
+footer section {
+    margin-bottom: var(--espacamento-sm);
+}
+
+footer h2 {
+    color: var(--cor-neutra-clara);
+    font-size: var(--fonte-tamanho-h3);
+    margin-bottom: var(--espacamento-xs);
+}
+
+footer ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: var(--espacamento-sm);
+}
+
+footer li {
+    font-size: var(--fonte-tamanho-pequeno);
+    line-height: 1.5;
+}
+
+footer a {
+    color: var(--cor-secundaria-verde);
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+footer a:hover {
+    color: var(--cor-acento-claro);
+}
+
+/* 8. AJUSTES FINOS (EXCLUSIVO PARA PÁGINAS DE FORMULÁRIO) */
+.texto-centralizado {
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: var(--espacamento-lg);
+}
+.texto-centralizado h2,
+.texto-centralizado p {
+    text-align: center;
+}
