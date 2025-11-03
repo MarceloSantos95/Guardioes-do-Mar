@@ -2,7 +2,6 @@
 // 1. MÓDULO DE ROTEAMENTO/SPA (Controlador Principal)
 // =========================================================
 
-// Mapeamento de Rotas (Associa o #hash ao template)
 const rotas = {
     '': TemplateHome, 
     '#home': TemplateHome,
@@ -10,25 +9,19 @@ const rotas = {
     '#cadastro': TemplateCadastro
 };
 
-// Elemento raiz onde o conteúdo será injetado
 const appRoot = document.getElementById('app-root');
 
-// Função de Carregamento de Conteúdo (Core do SPA)
 function carregarConteudo() {
     const hash = window.location.hash; 
     
-    // Pega o template correspondente ou volta para a Home
     const templateHTML = rotas[hash] || rotas['#home']; 
     
-    // 1. Injeta o HTML
     if (appRoot) {
         appRoot.innerHTML = templateHTML;
     }
     
-    // 2. Garante que o menu hambúrguer feche após a navegação
     fecharMenu();
 
-    // 3. Adiciona eventos aos elementos recém-injetados (ex: submissão de formulário)
     adicionarEventos(); 
 }
 
@@ -36,7 +29,6 @@ function carregarConteudo() {
 // 4. MÓDULO DE EVENTOS E UI (Interatividade)
 // =========================================================
 
-// Função para abrir/fechar o menu hambúrguer
 function toggleMenu() {
     const navMenu = document.querySelector('nav');
     const bodyElement = document.body;
@@ -47,7 +39,6 @@ function toggleMenu() {
     }
 }
 
-// Função para garantir que o menu está fechado
 function fecharMenu() {
     const navMenu = document.querySelector('nav');
     const bodyElement = document.body;
@@ -58,9 +49,8 @@ function fecharMenu() {
     }
 }
 
-// Liga eventos que SÃO INJETADOS no DOM
 function adicionarEventos() {
-    // Liga a submissão do formulário à função de validação
+    
     const formCadastro = document.getElementById('form-cadastro');
     if (formCadastro) {
         formCadastro.addEventListener('submit', function(event) {
@@ -70,7 +60,6 @@ function adicionarEventos() {
     }
 }
 
-// Inicialização do SPA e Eventos Fixos
 document.addEventListener('DOMContentLoaded', function() {
     const menuIcone = document.querySelector('.menu-hamburguer');
     
@@ -93,7 +82,6 @@ function validarFormulario(form) {
 
     let erros = [];
     
-    // --- 1. Validação de Consistência (Checkboxes: Deve haver pelo menos 1) ---
     const interesses = form.querySelectorAll('input[name="interesse"]:checked');
     const fieldsetInteresses = document.getElementById('fieldset-interesses');
 
@@ -104,16 +92,13 @@ function validarFormulario(form) {
         fieldsetInteresses.classList.remove('erro-borda');
     }
     
-    // --- 2. Validação de Consistência (CPF: Apenas numéricos) ---
     const cpfInput = form.querySelector('#cpf');
     const cpfValor = cpfInput.value;
-    
-    // Se a validação nativa falhar (ou se o valor tiver 11 dígitos, mas não for número)
+
     if (cpfValor.length === 11 && isNaN(Number(cpfValor))) {
         erros.push("O CPF deve conter apenas números (sem pontos ou traços).");
     }
     
-    // --- 3. EXIBIÇÃO DE FEEDBACK ---
     if (erros.length > 0) {
         const listaErros = erros.map(erro => `<li>${erro}</li>`).join('');
         
@@ -124,7 +109,7 @@ function validarFormulario(form) {
             </div>
         `;
     } else {
-        // Sucesso
+       
         feedbackDiv.innerHTML = `
             <div class="alert alert-success">
                 Cadastro enviado com sucesso! Entraremos em contato em breve.
@@ -132,7 +117,6 @@ function validarFormulario(form) {
         `;
         form.reset(); 
         
-        // Simulação de envio SPA: Volta para a home após 3 segundos
         setTimeout(() => {
             window.location.hash = '#home'; 
         }, 3000);
