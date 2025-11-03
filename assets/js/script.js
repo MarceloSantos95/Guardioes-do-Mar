@@ -2,9 +2,6 @@
 // 4. MÓDULO DE EVENTOS E UI (Interatividade - Funções Globais)
 // =========================================================
 
-// FUNÇÕES DE UI MOVIDAS PARA O ESCOPO GLOBAL PARA SEREM ACESSADAS CORRETAMENTE
-
-// Função para abrir/fechar o menu hambúrguer
 function toggleMenu() {
     const navMenu = document.querySelector('nav');
     const bodyElement = document.body;
@@ -15,7 +12,6 @@ function toggleMenu() {
     }
 }
 
-// Função para garantir que o menu está fechado (Chamada pelo roteador após a navegação)
 function fecharMenu() {
     const navMenu = document.querySelector('nav');
     const bodyElement = document.body;
@@ -26,6 +22,20 @@ function fecharMenu() {
     }
 }
 
+// ... (restante do código SPA, templates e validação) ...
+
+// INICIALIZAÇÃO E LIGAÇÃO DE EVENTOS FIXOS
+document.addEventListener('DOMContentLoaded', function() {
+    // CORREÇÃO DE SELETOR FINAL: Usa querySelector com o ID, mais robusto
+    const menuIcone = document.querySelector('#menu-toggle'); 
+    
+    if (menuIcone) {
+        menuIcone.addEventListener('click', toggleMenu);
+    }
+
+    carregarConteudo(); 
+    window.addEventListener('hashchange', carregarConteudo);
+});
 // =========================================================
 // 1. MÓDULO DE ROTEAMENTO/SPA (Controlador Principal)
 // =========================================================
