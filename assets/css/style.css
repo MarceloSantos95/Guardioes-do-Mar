@@ -306,7 +306,7 @@ input:invalid:not(:focus):not(:placeholder-shown) {
 }
 
 @media (max-width: 768px) {
-    /* REGRA CRÍTICA: Esconde o menu no mobile por padrão */
+    /* REGRA CRÍTICA ADICIONADA: Esconde o menu por padrão no mobile */
     nav {
         display: none; 
     }
@@ -335,6 +335,10 @@ input:invalid:not(:focus):not(:placeholder-shown) {
     nav.menu-aberto ul li a {
         font-size: 1.5rem;
         color: var(--cor-primaria-azul);
+    }
+    
+    .menu-hamburguer {
+        display: block !important; /* Garante que o ícone apareça */
     }
 }
 
