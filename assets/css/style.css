@@ -100,10 +100,9 @@ header img:hover {
     transform: scale(1.05);
 }
 
-/* Menu UL (Configuração Mobile - Vertical por Padrão) */
 nav ul {
     list-style: none;
-    /* REMOVIDO: display: flex; Globalmente */
+    display: flex;
     gap: var(--espacamento-md);
 }
 
@@ -128,8 +127,7 @@ nav ul li a:hover::after {
     width: 100%;
 }
 
-/* Oculta o botão no desktop por padrão */
-.menu-hamburguer { display: none; } 
+.menu-hamburguer { display: none; }
 
 /* HERO BANNER */
 .hero-banner {
@@ -216,19 +214,10 @@ nav ul li a:hover::after {
     cursor: not-allowed;
 }
 
-/* 4. MEDIA QUERIES (RESPONSIVIDADE) */
-
+/* 4. MEDIA QUERIES (RESPONSIVIDADE) - Corrigido para Validação */
 @media (min-width: 768px) {
-    /* MESA/DESKTOP: Faz o menu ser horizontal e visível */
-    nav { 
-        display: block; 
-    }
-    nav ul {
-        display: flex; /* ATIVA O FLEXBOX/HORIZONTAL AQUI! */
-    }
-    .menu-hamburguer { 
-        display: none; 
-    }
+    nav { display: block; }
+    .menu-hamburguer { display: none; }
 }
 
 @media (min-width: 992px) {
@@ -237,50 +226,6 @@ nav ul li a:hover::after {
     }
     main {
         grid-column: 2 / 12;
-    }
-}
-
-/* MOBILE (max-width: 768px) - CORREÇÃO CRÍTICA */
-@media (max-width: 768px) {
-    /* 1. REGRA CRÍTICA: Esconde o menu por padrão no mobile */
-    nav {
-        display: none; 
-    }
-    
-    /* 2. FORÇA A VISIBILIDADE DO ÍCONE HAMBÚRGUER */
-    .menu-hamburguer {
-        display: block !important;
-        background: none;
-        border: none;
-        font-size: 2rem;
-        cursor: pointer;
-        color: var(--cor-neutra-escura);
-    }
-    
-    /* 3. A REGRA DE ABERTURA QUANDO O JS CLICA */
-    nav.menu-aberto {
-        display: flex !important; 
-        position: fixed; 
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100vh;
-        background-color: var(--cor-neutra-clara);
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        z-index: 999;
-    }
-    
-    nav.menu-aberto ul {
-        flex-direction: column;
-        text-align: center;
-        gap: var(--espacamento-lg);
-    }
-    
-    nav.menu-aberto ul li a {
-        font-size: 1.5rem;
-        color: var(--cor-primaria-azul);
     }
 }
 

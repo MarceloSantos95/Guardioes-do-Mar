@@ -22,20 +22,6 @@ function fecharMenu() {
     }
 }
 
-// ... (restante do código SPA, templates e validação) ...
-
-// INICIALIZAÇÃO E LIGAÇÃO DE EVENTOS FIXOS
-document.addEventListener('DOMContentLoaded', function() {
-    // CORREÇÃO DE SELETOR FINAL: Usa querySelector com o ID, mais robusto
-    const menuIcone = document.querySelector('#menu-toggle'); 
-    
-    if (menuIcone) {
-        menuIcone.addEventListener('click', toggleMenu);
-    }
-
-    carregarConteudo(); 
-    window.addEventListener('hashchange', carregarConteudo);
-});
 // =========================================================
 // 1. MÓDULO DE ROTEAMENTO/SPA (Controlador Principal)
 // =========================================================
@@ -131,7 +117,8 @@ function adicionarEventos() {
 
 // INICIALIZAÇÃO E LIGAÇÃO DE EVENTOS FIXOS
 document.addEventListener('DOMContentLoaded', function() {
-    const menuIcone = document.getElementById('menu-toggle');
+    // Busca o botão pelo ID 'menu-toggle'
+    const menuIcone = document.getElementById('menu-toggle'); 
     
     if (menuIcone) {
         menuIcone.addEventListener('click', toggleMenu);
@@ -144,6 +131,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // =========================================================
 // 2. MÓDULO DE TEMPLATES (HTML como strings)
+// (Os templates completos estão no código abaixo)
 // =========================================================
 
 const TemplateHome = `
