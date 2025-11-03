@@ -171,43 +171,6 @@ nav ul li a:hover::after {
     margin-bottom: var(--espacamento-lg);
 }
 
-@media (max-width: 768px) {
-
-    nav {
-        display: none; 
-    }
-    
-    nav.menu-aberto {
-        display: flex !important; 
-        position: fixed; 
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100vh; 
-        background-color: var(--cor-neutra-clara); 
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        z-index: 999;
-    }
-    
-    nav.menu-aberto ul {
-        flex-direction: column;
-        text-align: center;
-        gap: var(--espacamento-lg);
-    }
-    
-    nav.menu-aberto ul li a {
-        font-size: 1.5rem; 
-        color: var(--cor-primaria-azul);
-    }
-}
-
-
-.no-scroll {
-    overflow: hidden; 
-}
-
 /* 3. COMPONENTES: BOTÕES */
 .btn {
     padding: var(--espacamento-sm) var(--espacamento-lg);
@@ -330,6 +293,10 @@ input:invalid:not(:focus):not(:placeholder-shown) {
     color: var(--cor-erro);
 }
 
+.erro-borda {
+    border: 2px solid var(--cor-erro) !important;
+}
+
 /* 6. ESTILIZAÇÃO DE CARDS E CONTEÚDO */
 .projetos-grid {
     display: grid;
@@ -338,7 +305,41 @@ input:invalid:not(:focus):not(:placeholder-shown) {
     margin-bottom: var(--espacamento-xl);
 }
 
-@media (min-width: 992px) { /* Corrigido para Validação */
+@media (max-width: 768px) {
+    /* REGRA CRÍTICA: Esconde o menu no mobile por padrão */
+    nav {
+        display: none; 
+    }
+    
+    /* REGRA DE ABERTURA: Só mostra quando o JS adiciona a classe */
+    nav.menu-aberto {
+        display: flex !important; 
+        position: fixed; 
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: var(--cor-neutra-clara);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 999;
+    }
+    
+    nav.menu-aberto ul {
+        flex-direction: column;
+        text-align: center;
+        gap: var(--espacamento-lg);
+    }
+    
+    nav.menu-aberto ul li a {
+        font-size: 1.5rem;
+        color: var(--cor-primaria-azul);
+    }
+}
+
+
+@media (min-width: 992px) {
     .projetos-grid {
         grid-template-columns: repeat(3, 1fr);
         gap: var(--espacamento-md);
@@ -409,7 +410,7 @@ input:invalid:not(:focus):not(:placeholder-shown) {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-@media (min-width: 768px) { /* Corrigido para Validação */
+@media (min-width: 768px) {
     .flex-apoio {
         flex-direction: row;
     }
