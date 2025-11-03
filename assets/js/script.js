@@ -121,7 +121,7 @@ function adicionarEventos() {
 
 // INICIALIZAÇÃO E LIGAÇÃO DE EVENTOS FIXOS
 document.addEventListener('DOMContentLoaded', function() {
-    const menuIcone = document.querySelector('.menu-hamburguer');
+    const menuIcone = document.getElementById('menu-toggle');
     
     if (menuIcone) {
         menuIcone.addEventListener('click', toggleMenu);

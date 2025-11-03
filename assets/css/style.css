@@ -127,7 +127,8 @@ nav ul li a:hover::after {
     width: 100%;
 }
 
-.menu-hamburguer { display: none; }
+/* CORRIGIDO: Oculta o botão no desktop por padrão */
+.menu-hamburguer { display: none; } 
 
 /* HERO BANNER */
 .hero-banner {
@@ -229,6 +230,50 @@ nav ul li a:hover::after {
     }
 }
 
+/* CORREÇÃO CRÍTICA DO MOBILE (max-width: 768px) */
+@media (max-width: 768px) {
+    /* 1. Ocultação Padrão no Mobile */
+    nav {
+        display: none; 
+    }
+    
+    /* 2. FORÇA A VISIBILIDADE DO ÍCONE HAMBÚRGUER */
+    .menu-hamburguer {
+        display: block !important;
+        background: none;
+        border: none;
+        font-size: 2rem;
+        cursor: pointer;
+        color: var(--cor-neutra-escura);
+    }
+    
+    /* 3. A REGRA DE ABERTURA QUANDO O JS CLICA */
+    nav.menu-aberto {
+        display: flex !important; 
+        position: fixed; 
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: var(--cor-neutra-clara);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 999;
+    }
+    
+    nav.menu-aberto ul {
+        flex-direction: column;
+        text-align: center;
+        gap: var(--espacamento-lg);
+    }
+    
+    nav.menu-aberto ul li a {
+        font-size: 1.5rem;
+        color: var(--cor-primaria-azul);
+    }
+}
+
 /* 5. ESTILIZAÇÃO DE FORMULÁRIOS E FEEDBACK */
 fieldset {
     border: 1px solid #dcdcdc;
@@ -304,44 +349,6 @@ input:invalid:not(:focus):not(:placeholder-shown) {
     gap: var(--espacamento-lg);
     margin-bottom: var(--espacamento-xl);
 }
-
-@media (max-width: 768px) {
-    /* REGRA CRÍTICA ADICIONADA: Esconde o menu por padrão no mobile */
-    nav {
-        display: none; 
-    }
-    
-    /* REGRA DE ABERTURA: Só mostra quando o JS adiciona a classe */
-    nav.menu-aberto {
-        display: flex !important; 
-        position: fixed; 
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100vh;
-        background-color: var(--cor-neutra-clara);
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        z-index: 999;
-    }
-    
-    nav.menu-aberto ul {
-        flex-direction: column;
-        text-align: center;
-        gap: var(--espacamento-lg);
-    }
-    
-    nav.menu-aberto ul li a {
-        font-size: 1.5rem;
-        color: var(--cor-primaria-azul);
-    }
-    
-    .menu-hamburguer {
-        display: block !important; /* Garante que o ícone apareça */
-    }
-}
-
 
 @media (min-width: 992px) {
     .projetos-grid {
