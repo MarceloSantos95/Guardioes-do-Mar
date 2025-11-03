@@ -100,9 +100,10 @@ header img:hover {
     transform: scale(1.05);
 }
 
+/* Menu UL (Configuração Mobile - Vertical por Padrão) */
 nav ul {
     list-style: none;
-    display: flex;
+    /* REMOVIDO: display: flex; Globalmente */
     gap: var(--espacamento-md);
 }
 
@@ -127,7 +128,7 @@ nav ul li a:hover::after {
     width: 100%;
 }
 
-/* CORRIGIDO: Oculta o botão no desktop por padrão */
+/* Oculta o botão no desktop por padrão */
 .menu-hamburguer { display: none; } 
 
 /* HERO BANNER */
@@ -215,10 +216,19 @@ nav ul li a:hover::after {
     cursor: not-allowed;
 }
 
-/* 4. MEDIA QUERIES (RESPONSIVIDADE) - Corrigido para Validação */
+/* 4. MEDIA QUERIES (RESPONSIVIDADE) */
+
 @media (min-width: 768px) {
-    nav { display: block; }
-    .menu-hamburguer { display: none; }
+    /* MESA/DESKTOP: Faz o menu ser horizontal e visível */
+    nav { 
+        display: block; 
+    }
+    nav ul {
+        display: flex; /* ATIVA O FLEXBOX/HORIZONTAL AQUI! */
+    }
+    .menu-hamburguer { 
+        display: none; 
+    }
 }
 
 @media (min-width: 992px) {
@@ -230,9 +240,9 @@ nav ul li a:hover::after {
     }
 }
 
-/* CORREÇÃO CRÍTICA DO MOBILE (max-width: 768px) */
+/* MOBILE (max-width: 768px) - CORREÇÃO CRÍTICA */
 @media (max-width: 768px) {
-    /* 1. Ocultação Padrão no Mobile */
+    /* 1. REGRA CRÍTICA: Esconde o menu por padrão no mobile */
     nav {
         display: none; 
     }
