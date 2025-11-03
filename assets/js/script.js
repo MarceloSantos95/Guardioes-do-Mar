@@ -1,34 +1,10 @@
 // =========================================================
-// 1. MÓDULO DE ROTEAMENTO/SPA (Controlador Principal)
+// 4. MÓDULO DE EVENTOS E UI (Interatividade - Funções Globais)
 // =========================================================
 
-const rotas = {
-    '': TemplateHome, 
-    '#home': TemplateHome,
-    '#projetos': TemplateProjetos,
-    '#cadastro': TemplateCadastro
-};
+// FUNÇÕES DE UI MOVIDAS PARA O ESCOPO GLOBAL PARA SEREM ACESSADAS CORRETAMENTE
 
-const appRoot = document.getElementById('app-root');
-
-function carregarConteudo() {
-    const hash = window.location.hash; 
-    
-    const templateHTML = rotas[hash] || rotas['#home']; 
-    
-    if (appRoot) {
-        appRoot.innerHTML = templateHTML;
-    }
-    
-    fecharMenu();
-
-    adicionarEventos(); 
-}
-
-// =========================================================
-// 4. MÓDULO DE EVENTOS E UI (Interatividade)
-// =========================================================
-
+// Função para abrir/fechar o menu hambúrguer
 function toggleMenu() {
     const navMenu = document.querySelector('nav');
     const bodyElement = document.body;
@@ -39,6 +15,7 @@ function toggleMenu() {
     }
 }
 
+// Função para garantir que o menu está fechado (Chamada pelo roteador após a navegação)
 function fecharMenu() {
     const navMenu = document.querySelector('nav');
     const bodyElement = document.body;
@@ -49,28 +26,37 @@ function fecharMenu() {
     }
 }
 
-function adicionarEventos() {
+// =========================================================
+// 1. MÓDULO DE ROTEAMENTO/SPA (Controlador Principal)
+// =========================================================
+
+// Mapeamento de Rotas (URLs #hash para Templates)
+const rotas = {
+    '': TemplateHome, 
+    '#home': TemplateHome,
+    '#projetos': TemplateProjetos,
+    '#cadastro': TemplateCadastro
+};
+
+// Encontra o elemento raiz onde o conteúdo será injetado
+const appRoot = document.getElementById('app-root');
+
+// Função de Carregamento de Conteúdo (Core do SPA)
+function carregarConteudo() {
+    const hash = window.location.hash; 
+    const templateHTML = rotas[hash] || rotas['#home']; 
     
-    const formCadastro = document.getElementById('form-cadastro');
-    if (formCadastro) {
-        formCadastro.addEventListener('submit', function(event) {
-            event.preventDefault(); 
-            validarFormulario(formCadastro); 
-        });
+    // 1. Injeta o HTML
+    if (appRoot) {
+        appRoot.innerHTML = templateHTML;
     }
+    
+    // 2. Garante que o menu hambúrguer feche
+    fecharMenu();
+
+    // 3. Adiciona eventos específicos (formulário, botões)
+    adicionarEventos(); 
 }
-
-document.addEventListener('DOMContentLoaded', function() {
-    const menuIcone = document.querySelector('.menu-hamburguer');
-    
-    if (menuIcone) {
-        menuIcone.addEventListener('click', toggleMenu);
-    }
-
-    carregarConteudo(); 
-    window.addEventListener('hashchange', carregarConteudo);
-});
-
 
 // =========================================================
 // 3. MÓDULO DE VALIDAÇÃO (Requisito: Consistência de Dados)
@@ -81,7 +67,6 @@ function validarFormulario(form) {
     feedbackDiv.innerHTML = ''; 
 
     let erros = [];
-    
     const interesses = form.querySelectorAll('input[name="interesse"]:checked');
     const fieldsetInteresses = document.getElementById('fieldset-interesses');
 
@@ -94,7 +79,7 @@ function validarFormulario(form) {
     
     const cpfInput = form.querySelector('#cpf');
     const cpfValor = cpfInput.value;
-
+    
     if (cpfValor.length === 11 && isNaN(Number(cpfValor))) {
         erros.push("O CPF deve conter apenas números (sem pontos ou traços).");
     }
@@ -109,7 +94,6 @@ function validarFormulario(form) {
             </div>
         `;
     } else {
-       
         feedbackDiv.innerHTML = `
             <div class="alert alert-success">
                 Cadastro enviado com sucesso! Entraremos em contato em breve.
@@ -122,6 +106,30 @@ function validarFormulario(form) {
         }, 3000);
     }
 }
+
+
+// Liga eventos que SÃO INJETADOS no DOM
+function adicionarEventos() {
+    const formCadastro = document.getElementById('form-cadastro');
+    if (formCadastro) {
+        formCadastro.addEventListener('submit', function(event) {
+            event.preventDefault(); 
+            validarFormulario(formCadastro); 
+        });
+    }
+}
+
+// INICIALIZAÇÃO E LIGAÇÃO DE EVENTOS FIXOS
+document.addEventListener('DOMContentLoaded', function() {
+    const menuIcone = document.querySelector('.menu-hamburguer');
+    
+    if (menuIcone) {
+        menuIcone.addEventListener('click', toggleMenu);
+    }
+
+    carregarConteudo(); 
+    window.addEventListener('hashchange', carregarConteudo);
+});
 
 
 // =========================================================
