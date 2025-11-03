@@ -172,9 +172,13 @@ nav ul li a:hover::after {
 }
 
 @media (max-width: 768px) {
+
+    nav {
+        display: none; 
+    }
     
     nav.menu-aberto {
-        display: flex; 
+        display: flex !important; 
         position: fixed; 
         top: 0;
         left: 0;
