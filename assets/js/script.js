@@ -117,7 +117,7 @@ function adicionarEventos() {
 
 // INICIALIZAÇÃO E LIGAÇÃO DE EVENTOS FIXOS
 document.addEventListener('DOMContentLoaded', function() {
-    // Busca o botão pelo ID 'menu-toggle'
+    // CORRIGIDO: Agora ele busca pelo ID 'menu-toggle' do novo botão
     const menuIcone = document.getElementById('menu-toggle'); 
     
     if (menuIcone) {
@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // =========================================================
 // 2. MÓDULO DE TEMPLATES (HTML como strings)
-// (Os templates completos estão no código abaixo)
+// (Os templates completos estão abaixo)
 // =========================================================
 
 const TemplateHome = `
