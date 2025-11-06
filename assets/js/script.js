@@ -2,6 +2,9 @@
 // 4. MÓDULO DE EVENTOS E UI (Interatividade - Funções Globais)
 // =========================================================
 
+// FUNÇÕES DE UI MOVIDAS PARA O ESCOPO GLOBAL PARA SEREM ACESSADAS CORRETAMENTE
+
+// Função para abrir/fechar o menu hambúrguer
 function toggleMenu() {
     const navMenu = document.querySelector('nav');
     const bodyElement = document.body;
@@ -12,6 +15,7 @@ function toggleMenu() {
     }
 }
 
+// Função para garantir que o menu está fechado (Chamada pelo roteador após a navegação)
 function fecharMenu() {
     const navMenu = document.querySelector('nav');
     const bodyElement = document.body;
@@ -106,6 +110,7 @@ function validarFormulario(form) {
 
 // Liga eventos que SÃO INJETADOS no DOM
 function adicionarEventos() {
+    // Apenas liga o evento do formulário, que é INJETADO
     const formCadastro = document.getElementById('form-cadastro');
     if (formCadastro) {
         formCadastro.addEventListener('submit', function(event) {
@@ -113,13 +118,14 @@ function adicionarEventos() {
             validarFormulario(formCadastro); 
         });
     }
+    // O evento do menu NÃO é religado aqui!
 }
 
-// INICIALIZAÇÃO E LIGAÇÃO DE EVENTOS FIXOS
+// INICIALIZAÇÃO E LIGAÇÃO DE EVENTOS FIXOS (CORRIGIDO)
 document.addEventListener('DOMContentLoaded', function() {
-    // CORRIGIDO: Agora ele busca pelo ID 'menu-toggle' do novo botão
     const menuIcone = document.getElementById('menu-toggle'); 
     
+    // Liga o evento do Hambúrguer APENAS UMA VEZ!
     if (menuIcone) {
         menuIcone.addEventListener('click', toggleMenu);
     }
@@ -130,8 +136,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 // =========================================================
-// 2. MÓDULO DE TEMPLATES (HTML como strings)
-// (Os templates completos estão abaixo)
+// 2. MÓDULO DE TEMPLATES (HTML como strings) - COMPLETO
 // =========================================================
 
 const TemplateHome = `
@@ -199,7 +204,7 @@ const TemplateCadastro = `
                     
                     <p>Qual tipo de ação dos Guardiões do Mar mais te interessa?</p>
                     <div><input type="checkbox" id="resgate" name="interesse" value="resgate"><label for="resgate">Resgate e Monitoramento de Praias</label></div>
-                    <div><input type="checkbox" id="educacao" name="interesse" value="educacao"><label for="educacao">Educação e Conscientização</label></div>
+                    <div><input type="checkbox" id="educacao" id="educacao" name="interesse" value="educacao"><label for="educacao">Educação e Conscientização</label></div>
                     <div><input type="checkbox" id="administrativo" name="interesse" value="administrativo"><label for="administrativo">Apoio Administrativo (eventos e redes sociais)</label></div>
                 </fieldset>
 
