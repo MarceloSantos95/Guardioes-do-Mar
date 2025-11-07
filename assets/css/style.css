@@ -26,12 +26,14 @@
     --breakpoint-xxl: 1400px;
 }
 
+/* RESET */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
+/* ESTRUTURA BÁSICA */
 body {
     background-color: var(--cor-neutra-fundo);
     color: var(--cor-neutra-escura);
@@ -70,20 +72,13 @@ a:hover {
     padding: 0 var(--espacamento-sm);
 }
 
-/* 1. LEIAUTE GERAL */
-header, footer, main {
-    grid-column: 1 / -1;
-}
-
-main {
-    padding: var(--espacamento-xl) 0;
-}
-
-/* 2. NAVEGAÇÃO E HEADER */
+/* HEADER E NAVEGAÇÃO */
 header {
     background-color: var(--cor-neutra-clara);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     padding: var(--espacamento-sm) var(--espacamento-md);
+    position: relative;
+    z-index: 1000;
 }
 
 .header-content {
@@ -100,6 +95,7 @@ header img:hover {
     transform: scale(1.05);
 }
 
+/* MENU PADRÃO */
 nav ul {
     list-style: none;
     display: flex;
@@ -127,7 +123,62 @@ nav ul li a:hover::after {
     width: 100%;
 }
 
-.menu-hamburguer { display: none; }
+/* BOTÃO MENU HAMBÚRGUER */
+.menu-hamburguer {
+    display: block;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: var(--cor-primaria-azul);
+}
+
+/* MENU MOBILE FECHADO */
+#menu-principal {
+    display: none;
+}
+
+/* MENU MOBILE ABERTO */
+#menu-principal.menu-aberto {
+    display: block;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    background-color: var(--cor-neutra-clara);
+    text-align: center;
+    padding: 1rem 0;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+    z-index: 100;
+}
+
+#menu-principal.menu-aberto ul {
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.no-scroll {
+    overflow: hidden;
+}
+
+/* DESKTOP */
+@media (min-width: 768px) {
+    .menu-hamburguer {
+        display: none;
+    }
+
+    #menu-principal {
+        display: block !important;
+        position: static;
+        box-shadow: none;
+    }
+
+    #menu-principal ul {
+        flex-direction: row;
+        justify-content: flex-end;
+        gap: var(--espacamento-md);
+    }
+}
 
 /* HERO BANNER */
 .hero-banner {
@@ -171,40 +222,7 @@ nav ul li a:hover::after {
     margin-bottom: var(--espacamento-lg);
 }
 
-@media (max-width: 768px) {
-    
-    nav.menu-aberto {
-        display: flex; 
-        position: fixed; 
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100vh; 
-        background-color: var(--cor-neutra-clara); 
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        z-index: 999;
-    }
-    
-    nav.menu-aberto ul {
-        flex-direction: column;
-        text-align: center;
-        gap: var(--espacamento-lg);
-    }
-    
-    nav.menu-aberto ul li a {
-        font-size: 1.5rem; 
-        color: var(--cor-primaria-azul);
-    }
-}
-
-
-.no-scroll {
-    overflow: hidden; 
-}
-
-/* 3. COMPONENTES: BOTÕES */
+/* BOTÕES */
 .btn {
     padding: var(--espacamento-sm) var(--espacamento-lg);
     border-radius: 20px;
@@ -227,10 +245,6 @@ nav ul li a:hover::after {
     transform: translateY(-2px);
 }
 
-.btn-primary:active {
-    background-color: #004085;
-}
-
 .btn-secondary {
     background-color: var(--cor-secundaria-verde);
     color: var(--cor-neutra-clara);
@@ -241,28 +255,7 @@ nav ul li a:hover::after {
     transform: translateY(-2px);
 }
 
-.btn:disabled {
-    background-color: var(--cor-neutra-escura);
-    opacity: 0.6;
-    cursor: not-allowed;
-}
-
-/* 4. MEDIA QUERIES (RESPONSIVIDADE) - Corrigido para Validação */
-@media (min-width: 768px) {
-    nav { display: block; }
-    .menu-hamburguer { display: none; }
-}
-
-@media (min-width: 992px) {
-    body {
-        grid-template-columns: repeat(12, 1fr);
-    }
-    main {
-        grid-column: 2 / 12;
-    }
-}
-
-/* 5. ESTILIZAÇÃO DE FORMULÁRIOS E FEEDBACK */
+/* FORMULÁRIOS */
 fieldset {
     border: 1px solid #dcdcdc;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
@@ -307,10 +300,6 @@ input:invalid {
     border-width: 2px;
 }
 
-input:invalid:not(:focus):not(:placeholder-shown) {
-    border-width: 2px;
-}
-
 .alert {
     padding: var(--espacamento-sm);
     margin-bottom: var(--espacamento-md);
@@ -326,7 +315,11 @@ input:invalid:not(:focus):not(:placeholder-shown) {
     color: var(--cor-erro);
 }
 
-/* 6. ESTILIZAÇÃO DE CARDS E CONTEÚDO */
+.erro-borda {
+    border: 2px solid var(--cor-erro) !important;
+}
+
+/* CARDS */
 .projetos-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -334,7 +327,7 @@ input:invalid:not(:focus):not(:placeholder-shown) {
     margin-bottom: var(--espacamento-xl);
 }
 
-@media (min-width: 992px) { /* Corrigido para Validação */
+@media (min-width: 992px) {
     .projetos-grid {
         grid-template-columns: repeat(3, 1fr);
         gap: var(--espacamento-md);
@@ -377,7 +370,7 @@ input:invalid:not(:focus):not(:placeholder-shown) {
     border-radius: 20px;
     font-weight: 600;
     display: inline-block;
-    margin: 0 0 var(--espacamento-xs) 0;
+    margin-bottom: var(--espacamento-xs);
 }
 
 .badge-conservacao {
@@ -390,7 +383,7 @@ input:invalid:not(:focus):not(:placeholder-shown) {
     color: var(--cor-neutra-clara);
 }
 
-/* 6.5. ESTILIZAÇÃO DA SEÇÃO DE APOIO (#apoie) */
+/* APOIO */
 .flex-apoio {
     display: flex;
     flex-direction: column;
@@ -405,7 +398,7 @@ input:invalid:not(:focus):not(:placeholder-shown) {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-@media (min-width: 768px) { /* Corrigido para Validação */
+@media (min-width: 768px) {
     .flex-apoio {
         flex-direction: row;
     }
@@ -414,32 +407,13 @@ input:invalid:not(:focus):not(:placeholder-shown) {
     }
 }
 
-main > h1 {
-    text-align: center;
-}
-.projetos-grid h2:first-child,
-.projetos-grid p:first-of-type {
-    text-align: center;
-    max-width: 900px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-/* 7. ESTILIZAÇÃO DE FOOTER */
+/* FOOTER */
 footer {
     background-color: var(--cor-neutra-escura);
     color: #bdc3c7;
     padding: var(--espacamento-md) 0;
     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
     text-align: center;
-}
-
-footer .container {
-    padding: var(--espacamento-md) var(--espacamento-sm);
-}
-
-footer section {
-    margin-bottom: var(--espacamento-sm);
 }
 
 footer h2 {
@@ -450,13 +424,7 @@ footer h2 {
 
 footer ul {
     list-style: none;
-    padding: 0;
     margin-bottom: var(--espacamento-sm);
-}
-
-footer li {
-    font-size: var(--fonte-tamanho-pequeno);
-    line-height: 1.5;
 }
 
 footer a {
@@ -469,12 +437,10 @@ footer a:hover {
     color: var(--cor-acento-claro);
 }
 
-/* 8. AJUSTES FINOS (EXCLUSIVO PARA PÁGINAS DE FORMULÁRIO) */
+/* AJUSTES DE FORMULÁRIO */
 .texto-centralizado {
     max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: var(--espacamento-lg);
+    margin: 0 auto var(--espacamento-lg);
 }
 .texto-centralizado h2,
 .texto-centralizado p {
