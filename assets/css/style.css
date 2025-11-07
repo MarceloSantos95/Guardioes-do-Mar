@@ -78,7 +78,7 @@ header {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     padding: var(--espacamento-sm) var(--espacamento-md);
     position: relative;
-    z-index: 1000;
+    z-index: 1000; /* CRÍTICO: Deve estar acima de tudo */
 }
 
 .header-content {
@@ -95,7 +95,7 @@ header img:hover {
     transform: scale(1.05);
 }
 
-/* MENU PADRÃO */
+/* MENU PADRÃO (Desktop) */
 nav ul {
     list-style: none;
     display: flex;
@@ -138,18 +138,20 @@ nav ul li a:hover::after {
     display: none;
 }
 
-/* MENU MOBILE ABERTO */
+/* MENU MOBILE ABERTO (PROBLEMA RESOLVIDO) */
 #menu-principal.menu-aberto {
     display: block;
     position: absolute;
-    top: 70px;
+    top: 100%; /* Inicia logo ABAIXO do header */
     left: 0;
     width: 100%;
+    height: calc(100vh - 65px); /* Ocupa o restante da tela */
     background-color: var(--cor-neutra-clara);
     text-align: center;
     padding: 1rem 0;
     box-shadow: 0 5px 10px rgba(0,0,0,0.1);
-    z-index: 100;
+    z-index: 999; 
+    overflow-y: auto;
 }
 
 #menu-principal.menu-aberto ul {
@@ -161,16 +163,19 @@ nav ul li a:hover::after {
     overflow: hidden;
 }
 
-/* DESKTOP */
+/* DESKTOP MEDIA QUERY */
 @media (min-width: 768px) {
     .menu-hamburguer {
         display: none;
     }
 
+    /* O menu deve voltar a ser visível e horizontal no desktop */
     #menu-principal {
         display: block !important;
         position: static;
         box-shadow: none;
+        height: auto;
+        width: auto;
     }
 
     #menu-principal ul {
