@@ -43,7 +43,10 @@ function carregarConteudo() {
         appRoot.innerHTML = templateHTML;
     }
     
+    // Garante que o menu feche após a navegação SPA
     fecharMenu();
+
+    // Adiciona eventos aos templates injetados
     adicionarEventos(); 
 }
 
@@ -69,6 +72,7 @@ function validarFormulario(form) {
     const cpfInput = form.querySelector('#cpf');
     const cpfValor = cpfInput.value;
     
+    // Validação de Consistência
     if (cpfValor.length === 11 && isNaN(Number(cpfValor))) {
         erros.push("O CPF deve conter apenas números (sem pontos ou traços).");
     }
@@ -97,7 +101,7 @@ function validarFormulario(form) {
 }
 
 
-
+// Liga eventos que SÃO INJETADOS no DOM
 function adicionarEventos() {
     const formCadastro = document.getElementById('form-cadastro');
     if (formCadastro) {
@@ -108,15 +112,16 @@ function adicionarEventos() {
     }
 }
 
-
+// INICIALIZAÇÃO E LIGAÇÃO DE EVENTOS FIXOS (ÚNICA VEZ)
 document.addEventListener('DOMContentLoaded', function() {
-   
+    // Apenas liga o evento do botão FIXO uma única vez!
     const menuIcone = document.getElementById('menu-toggle'); 
     
     if (menuIcone) {
         menuIcone.addEventListener('click', toggleMenu);
     }
 
+    // Inicialização do SPA
     carregarConteudo(); 
     window.addEventListener('hashchange', carregarConteudo);
 });
