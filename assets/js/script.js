@@ -1,10 +1,3 @@
-// =========================================================
-// 4. MÓDULO DE EVENTOS E UI (Interatividade - Funções Globais)
-// =========================================================
-
-// FUNÇÕES DE UI MOVIDAS PARA O ESCOPO GLOBAL PARA SEREM ACESSADAS CORRETAMENTE
-
-// Função para abrir/fechar o menu hambúrguer
 function toggleMenu() {
     const navMenu = document.querySelector('nav');
     const bodyElement = document.body;
@@ -15,7 +8,6 @@ function toggleMenu() {
     }
 }
 
-// Função para garantir que o menu está fechado (Chamada pelo roteador após a navegação)
 function fecharMenu() {
     const navMenu = document.querySelector('nav');
     const bodyElement = document.body;
@@ -26,11 +18,6 @@ function fecharMenu() {
     }
 }
 
-// =========================================================
-// 1. MÓDULO DE ROTEAMENTO/SPA (Controlador Principal)
-// =========================================================
-
-// Mapeamento de Rotas (URLs #hash para Templates)
 const rotas = {
     '': TemplateHome, 
     '#home': TemplateHome,
@@ -38,29 +25,19 @@ const rotas = {
     '#cadastro': TemplateCadastro
 };
 
-// Encontra o elemento raiz onde o conteúdo será injetado
 const appRoot = document.getElementById('app-root');
 
-// Função de Carregamento de Conteúdo (Core do SPA)
 function carregarConteudo() {
     const hash = window.location.hash; 
     const templateHTML = rotas[hash] || rotas['#home']; 
     
-    // 1. Injeta o HTML
     if (appRoot) {
         appRoot.innerHTML = templateHTML;
     }
     
-    // 2. Garante que o menu hambúrguer feche
     fecharMenu();
-
-    // 3. Adiciona eventos específicos (formulário, botões)
     adicionarEventos(); 
 }
-
-// =========================================================
-// 3. MÓDULO DE VALIDAÇÃO (Requisito: Consistência de Dados)
-// =========================================================
 
 function validarFormulario(form) {
     const feedbackDiv = document.getElementById('feedback-mensagem');
@@ -85,7 +62,7 @@ function validarFormulario(form) {
     }
     
     if (erros.length > 0) {
-        const listaErros = erros.map(erro => `<li>${erro}</li>`).join('');
+        const listaErros = erros.map(function(erro) { return '<li>' + erro + '</li>'; }).join('');
         
         feedbackDiv.innerHTML = `
             <div class="alert alert-error">
@@ -107,10 +84,7 @@ function validarFormulario(form) {
     }
 }
 
-
-// Liga eventos que SÃO INJETADOS no DOM
 function adicionarEventos() {
-    // Apenas liga o evento do formulário, que é INJETADO
     const formCadastro = document.getElementById('form-cadastro');
     if (formCadastro) {
         formCadastro.addEventListener('submit', function(event) {
@@ -118,14 +92,11 @@ function adicionarEventos() {
             validarFormulario(formCadastro); 
         });
     }
-    // O evento do menu NÃO é religado aqui!
 }
 
-// INICIALIZAÇÃO E LIGAÇÃO DE EVENTOS FIXOS (CORRIGIDO)
 document.addEventListener('DOMContentLoaded', function() {
     const menuIcone = document.getElementById('menu-toggle'); 
     
-    // Liga o evento do Hambúrguer APENAS UMA VEZ!
     if (menuIcone) {
         menuIcone.addEventListener('click', toggleMenu);
     }
@@ -134,10 +105,6 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('hashchange', carregarConteudo);
 });
 
-
-// =========================================================
-// 2. MÓDULO DE TEMPLATES (HTML como strings) - COMPLETO
-// =========================================================
 
 const TemplateHome = `
     <main class="container">
@@ -204,7 +171,7 @@ const TemplateCadastro = `
                     
                     <p>Qual tipo de ação dos Guardiões do Mar mais te interessa?</p>
                     <div><input type="checkbox" id="resgate" name="interesse" value="resgate"><label for="resgate">Resgate e Monitoramento de Praias</label></div>
-                    <div><input type="checkbox" id="educacao" id="educacao" name="interesse" value="educacao"><label for="educacao">Educação e Conscientização</label></div>
+                    <div><input type="checkbox" id="educacao" name="interesse" value="educacao"><label for="educacao">Educação e Conscientização</label></div>
                     <div><input type="checkbox" id="administrativo" name="interesse" value="administrativo"><label for="administrativo">Apoio Administrativo (eventos e redes sociais)</label></div>
                 </fieldset>
 
