@@ -3,7 +3,7 @@
 // =========================================================
 
 function toggleMenu() {
-    const navMenu = document.querySelector('nav');
+    const navMenu = document.getElementById('menu-principal'); // ✅ Correção aqui
     const bodyElement = document.body;
     
     if (navMenu && bodyElement) {
@@ -13,7 +13,7 @@ function toggleMenu() {
 }
 
 function fecharMenu() {
-    const navMenu = document.querySelector('nav');
+    const navMenu = document.getElementById('menu-principal'); // ✅ Correção aqui
     const bodyElement = document.body;
     
     if (navMenu && bodyElement && navMenu.classList.contains('menu-aberto')) {
@@ -100,7 +100,6 @@ function validarFormulario(form) {
     }
 }
 
-
 // Liga eventos que SÃO INJETADOS no DOM
 function adicionarEventos() {
     const formCadastro = document.getElementById('form-cadastro');
@@ -125,7 +124,6 @@ document.addEventListener('DOMContentLoaded', function() {
     carregarConteudo(); 
     window.addEventListener('hashchange', carregarConteudo);
 });
-
 
 // =========================================================
 // 2. MÓDULO DE TEMPLATES (HTML como strings) - COMPLETO
@@ -214,7 +212,7 @@ const TemplateProjetos = `
 
         <section class="projetos-grid">
             <article class="card-projeto">
-                <img src="assets/imagens/Resgatando_Tartaruga.png" alt="...">
+                <img src="assets/imagens/Resgatando_Tartaruga.png" alt="Tartaruga sendo resgatada.">
                 <div class="card-content"> 
                     <h3>1. Resgate e Reabilitação Marinha</h3>
                     <span class="badge badge-conservacao">Prioridade</span>
@@ -256,7 +254,7 @@ const TemplateProjetos = `
                     <p>Sua contribuição financeira é vital para cobrir custos de reabilitação, equipamentos de monitoramento e combustível para as patrulhas. Todo valor faz a diferença.</p>
                     <h4>Nossas Necessidades Atuais:</h4>
                     <ul class="lista-necessidades">
-                        <li><strong>$ 50:</strong> Cobre o custo de medicamentos para um filhote resgatado.</li>
+                        <li><strong>R$ 50</strong>: Cobre o custo de medicamentos para um filhote resgatado.</li>
                         <li><strong>R$ 150</strong>: Financia uma hora de patrulha de monitoramento de praia.</li>
                         <li><strong>R$ 500</strong>: Compra um kit de primeiros socorros para a base.</li>
                     </ul>
