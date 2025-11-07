@@ -1,3 +1,7 @@
+// =========================================================
+// 4. MÓDULO DE EVENTOS E UI (Interatividade - Funções Globais)
+// =========================================================
+
 function toggleMenu() {
     const navMenu = document.querySelector('nav');
     const bodyElement = document.body;
@@ -17,6 +21,10 @@ function fecharMenu() {
         bodyElement.classList.remove('no-scroll');
     }
 }
+
+// =========================================================
+// 1. MÓDULO DE ROTEAMENTO/SPA (Controlador Principal)
+// =========================================================
 
 const rotas = {
     '': TemplateHome, 
@@ -38,6 +46,10 @@ function carregarConteudo() {
     fecharMenu();
     adicionarEventos(); 
 }
+
+// =========================================================
+// 3. MÓDULO DE VALIDAÇÃO (Requisito: Consistência de Dados)
+// =========================================================
 
 function validarFormulario(form) {
     const feedbackDiv = document.getElementById('feedback-mensagem');
@@ -84,6 +96,8 @@ function validarFormulario(form) {
     }
 }
 
+
+
 function adicionarEventos() {
     const formCadastro = document.getElementById('form-cadastro');
     if (formCadastro) {
@@ -94,7 +108,9 @@ function adicionarEventos() {
     }
 }
 
+
 document.addEventListener('DOMContentLoaded', function() {
+   
     const menuIcone = document.getElementById('menu-toggle'); 
     
     if (menuIcone) {
@@ -105,6 +121,10 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('hashchange', carregarConteudo);
 });
 
+
+// =========================================================
+// 2. MÓDULO DE TEMPLATES (HTML como strings) - COMPLETO
+// =========================================================
 
 const TemplateHome = `
     <main class="container">
