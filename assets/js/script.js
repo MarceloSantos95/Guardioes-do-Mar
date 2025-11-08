@@ -1,7 +1,3 @@
-// =========================================================
-// 4. MÓDULO DE EVENTOS E UI (Interatividade - Funções Globais)
-// =========================================================
-
 function toggleMenu() {
     const navMenu = document.getElementById('menu-principal');
     const bodyElement = document.body;
@@ -33,10 +29,7 @@ const rotas = {
     '#cadastro': TemplateCadastro
 };
 
-// REMOVEMOS A DECLARAÇÃO GLOBAL DE appRoot AQUI! (Corrigindo o bug)
-
 function carregarConteudo() {
-    // CORREÇÃO CRÍTICA: O elemento é buscado DENTRO da função
     const appRoot = document.getElementById('app-root');
     const hash = window.location.hash; 
     const templateHTML = rotas[hash] || rotas['#home']; 
@@ -121,25 +114,6 @@ document.addEventListener('DOMContentLoaded', function() {
     carregarConteudo(); 
     window.addEventListener('hashchange', carregarConteudo);
 });
-
-// Fecha o menu ao clicar fora ou em um link
-document.addEventListener('click', (e) => {
-    const menu = document.getElementById('menu-principal');
-    const toggle = document.getElementById('menu-toggle');
-
-    if (!menu.classList.contains('menu-aberto')) return;
-
-    // Fecha ao clicar fora
-    if (!menu.contains(e.target) && e.target !== toggle) {
-        fecharMenu();
-    }
-
-    // Fecha ao clicar em um link
-    if (e.target.tagName === 'A' && menu.contains(e.target)) {
-        fecharMenu();
-    }
-});
-
 
 
 // =========================================================
@@ -229,7 +203,7 @@ const TemplateProjetos = `
 
         <section class="projetos-grid">
             <article class="card-projeto">
-                <img src="assets/imagens/Resgatando_Tartaruga.png" alt="Tartaruga sendo resgatada.">
+                <img src="/NOME_DO_SEU_REPOSITORIO/assets/imagens/Resgatando_Tartaruga.png" alt="Tartaruga sendo resgatada.">
                 <div class="card-content"> 
                     <h3>1. Resgate e Reabilitação Marinha</h3>
                     <span class="badge badge-conservacao">Prioridade</span>
@@ -238,7 +212,7 @@ const TemplateProjetos = `
             </article>
 
             <article class="card-projeto">
-                <img src="assets/imagens/Saindo_do_ninho.png" alt="Filhotes de tartaruga saindo de um ninho na areia.">
+                <img src="/NOME_DO_SEU_REPOSITORIO/assets/imagens/Saindo_do_ninho.png" alt="Filhotes de tartaruga saindo de um ninho na areia.">
                 <div class="card-content">
                     <h3>2. Monitoramento de Ninhos e Pesquisa</h3>
                     <span class="badge badge-doacao">Pesquisa</span>
@@ -247,7 +221,7 @@ const TemplateProjetos = `
             </article>
 
             <article class="card-projeto">
-                <img src="assets/imagens/Palestra.png" alt="Pessoa dando palestra sobre tartarugas para crianças.">
+                <img src="/NOME_DO_SEU_REPOSITORIO/assets/imagens/Palestra.png" alt="Pessoa dando palestra sobre tartarugas para crianças.">
                 <div class="card-content">
                     <h3>3. Educação Ambiental Comunitária</h3>
                     <span class="badge badge-doacao">Conscientização</span>
