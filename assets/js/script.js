@@ -26,7 +26,6 @@ function fecharMenu() {
 // 1. MÓDULO DE ROTEAMENTO/SPA (Controlador Principal)
 // =========================================================
 
-// Mapeamento de Rotas (URLs #hash para Templates)
 const rotas = {
     '': TemplateHome, 
     '#home': TemplateHome,
@@ -34,9 +33,11 @@ const rotas = {
     '#cadastro': TemplateCadastro
 };
 
-const appRoot = document.getElementById('app-root');
+// REMOVEMOS A DECLARAÇÃO GLOBAL DE appRoot AQUI! (Corrigindo o bug)
 
 function carregarConteudo() {
+    // CORREÇÃO CRÍTICA: O elemento é buscado DENTRO da função
+    const appRoot = document.getElementById('app-root');
     const hash = window.location.hash; 
     const templateHTML = rotas[hash] || rotas['#home']; 
     
