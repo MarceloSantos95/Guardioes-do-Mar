@@ -72,13 +72,13 @@ a:hover {
     padding: 0 var(--espacamento-sm);
 }
 
-/* HEADER E NAVEGAÇÃO */
+/* ===== HEADER E NAVEGAÇÃO ===== */
 header {
     background-color: var(--cor-neutra-clara);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     padding: var(--espacamento-sm) var(--espacamento-md);
     position: relative;
-    z-index: 1000; /* CRÍTICO: Deve estar acima de tudo */
+    z-index: 1000;
 }
 
 .header-content {
@@ -95,34 +95,6 @@ header img:hover {
     transform: scale(1.05);
 }
 
-/* MENU PADRÃO (Desktop) */
-nav ul {
-    list-style: none;
-    display: flex;
-    gap: var(--espacamento-md);
-}
-
-nav ul li a {
-    color: var(--cor-neutra-escura);
-    font-weight: 600;
-    position: relative;
-}
-
-nav ul li a::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: var(--cor-secundaria-verde);
-    transition: width 0.3s ease;
-}
-
-nav ul li a:hover::after {
-    width: 100%;
-}
-
 /* BOTÃO MENU HAMBÚRGUER */
 .menu-hamburguer {
     display: block;
@@ -133,25 +105,30 @@ nav ul li a:hover::after {
     color: var(--cor-primaria-azul);
 }
 
-/* MENU MOBILE FECHADO */
+/* MENU PADRÃO (Desktop) */
 #menu-principal {
     display: none;
 }
 
-/* MENU MOBILE ABERTO (PROBLEMA RESOLVIDO) */
+#menu-principal ul {
+    list-style: none;
+    display: flex;
+    gap: var(--espacamento-md);
+}
+
+/* ===== MENU MOBILE ABERTO ===== */
 #menu-principal.menu-aberto {
-    display: block;
-    position: absolute;
-    top: 100%; /* Inicia logo ABAIXO do header */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed; /* <- fixa sobre o conteúdo */
+    top: 70px; /* logo abaixo do header */
     left: 0;
     width: 100%;
-    height: calc(100vh - 65px); /* Ocupa o restante da tela */
-    background-color: var(--cor-neutra-clara);
-    text-align: center;
-    padding: 1rem 0;
-    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
-    z-index: 999; 
-    overflow-y: auto;
+    background-color: rgba(255, 255, 255, 0.98);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    padding: 1.5rem 0;
+    z-index: 9999;
 }
 
 #menu-principal.menu-aberto ul {
@@ -159,9 +136,37 @@ nav ul li a:hover::after {
     gap: 1.5rem;
 }
 
+#menu-principal.menu-aberto li a {
+    font-size: 1.2rem;
+    color: var(--cor-neutra-escura);
+    font-weight: 600;
+}
+
+/* Evita rolagem ao abrir o menu */
 .no-scroll {
     overflow: hidden;
 }
+
+/* ===== DESKTOP ===== */
+@media (min-width: 768px) {
+    .menu-hamburguer {
+        display: none;
+    }
+
+    #menu-principal {
+        display: block !important;
+        position: static;
+        background: none;
+        box-shadow: none;
+    }
+
+    #menu-principal ul {
+        flex-direction: row;
+        justify-content: flex-end;
+        gap: var(--espacamento-md);
+    }
+}
+
 
 /* DESKTOP MEDIA QUERY */
 @media (min-width: 768px) {

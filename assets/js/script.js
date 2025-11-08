@@ -122,6 +122,25 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('hashchange', carregarConteudo);
 });
 
+// Fecha o menu ao clicar fora ou em um link
+document.addEventListener('click', (e) => {
+    const menu = document.getElementById('menu-principal');
+    const toggle = document.getElementById('menu-toggle');
+
+    if (!menu.classList.contains('menu-aberto')) return;
+
+    // Fecha ao clicar fora
+    if (!menu.contains(e.target) && e.target !== toggle) {
+        fecharMenu();
+    }
+
+    // Fecha ao clicar em um link
+    if (e.target.tagName === 'A' && menu.contains(e.target)) {
+        fecharMenu();
+    }
+});
+
+
 
 // =========================================================
 // 2. MÓDULO DE TEMPLATES (HTML como strings) - COMPLETO
