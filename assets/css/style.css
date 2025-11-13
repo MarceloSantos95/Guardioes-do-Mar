@@ -188,7 +188,7 @@ nav ul li a:hover::after {
 /* HERO BANNER - CORREÇÃO CRÍTICA DO CAMINHO ABSOLUTO */
 .hero-banner {
     /* USE O NOME DO SEU REPOSITÓRIO AQUI */
-    background-image: url('/NOME_DO_SEU_REPOSITORIO/assets/imagens/Tartaruga_Nadando.png'); 
+    background-image: url('/Guardioes-do-Mar/assets/imagens/Tartaruga_Nadando.png'); 
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
