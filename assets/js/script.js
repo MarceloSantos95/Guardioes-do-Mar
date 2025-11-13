@@ -1,7 +1,3 @@
-// =========================================================
-// 4. MÓDULO DE EVENTOS E UI (Interatividade - Funções Globais)
-// =========================================================
-
 function toggleMenu() {
     const navMenu = document.getElementById('menu-principal');
     const bodyElement = document.body;
@@ -39,8 +35,8 @@ function carregarConteudo() {
     const templateHTML = rotas[hash] || rotas['#home']; 
     
     if (appRoot) {
-        // CORRIGIDO: Injeta apenas o conteúdo (sem a tag <main> duplicada)
-        appRoot.innerHTML = `<main class="container">${templateHTML}</main>`;
+        // CORREÇÃO CRÍTICA: Injeta o conteúdo envolvendo-o na DIV.container
+        appRoot.innerHTML = `<div class="container">${templateHTML}</div>`;
     }
     
     fecharMenu();
@@ -130,11 +126,11 @@ const TemplateHome = `
         <div class="container hero-content">
             <h1>Guardiões do Mar: Protegendo a Vida Marinha Brasileira</h1>
             <p>Desde 2010, nossa missão é garantir a sobrevivência e a proteção das espécies de tartarugas marinhas em nosso litoral, através de resgate, pesquisa e educação ambiental.</p>
-            <a href="#projetos" class="btn btn-secondary">DESCUBRA NOSSOS PROJETOS</a> 
+            <a href="#projetos" class="btn btn-secondary">DESCUBRA NOSOS PROJETOS</a> 
         </div>
     </section>
 
-    <section class="container" style="padding-top: var(--espacamento-xl);">
+    <section style="padding-top: var(--espacamento-xl);">
         <h2>Nossa Missão</h2>
         
         <article>
