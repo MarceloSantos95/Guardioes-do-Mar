@@ -1,25 +1,17 @@
-// =========================================================
-// 4. MÓDULO DE EVENTOS E UI (Funções de Usabilidade)
-//    NOTA: Mantidas globalmente (fora do DOMContentLoaded) para acessibilidade.
-// =========================================================
-
-// Função para abrir/fechar o painel de navegação (Menu Hambúrguer)
 function toggleMenu() {
     const navMenu = document.getElementById('menu-principal');
     const bodyElement = document.body;
     
     if (navMenu && bodyElement) {
-        navMenu.classList.toggle('menu-aberto'); // Adiciona/Remove a classe CSS
-        bodyElement.classList.toggle('no-scroll'); // Bloqueia a rolagem no fundo
+        navMenu.classList.toggle('menu-aberto');
+        bodyElement.classList.toggle('no-scroll');
     }
 }
 
-// Função para garantir que o menu está fechado (Chamada após a navegação SPA)
 function fecharMenu() {
     const navMenu = document.getElementById('menu-principal');
     const bodyElement = document.body;
     
-    // Verifica se o menu está aberto antes de tentar fechar
     if (navMenu && bodyElement && navMenu.classList.contains('menu-aberto')) {
         navMenu.classList.remove('menu-aberto');
         bodyElement.classList.remove('no-scroll');
@@ -30,31 +22,23 @@ function fecharMenu() {
 // 1. MÓDULO DE ROTEAMENTO/SPA (Controlador Principal)
 // =========================================================
 
-// Mapeamento de Rotas: Associa o hash da URL (ex: #home) ao Template HTML
 const rotas = {
-    '': TemplateHome, // Rota inicial (sem hash)
+    '': TemplateHome, 
     '#home': TemplateHome,
     '#projetos': TemplateProjetos,
     '#cadastro': TemplateCadastro
 };
 
-// Função de Carregamento de Conteúdo (Core do SPA)
 function carregarConteudo() {
-    const appRoot = document.getElementById('app-root'); // Contêiner principal do index.html
-    const hash = window.location.hash; // Pega o hash da URL
-    
-    // Encontra o template correspondente, ou volta para a Home se a rota for inválida
+    const appRoot = document.getElementById('app-root');
+    const hash = window.location.hash; 
     const templateHTML = rotas[hash] || rotas['#home']; 
     
-    // 1. Injeta o HTML no elemento app-root
     if (appRoot) {
         appRoot.innerHTML = templateHTML;
     }
     
-    // 2. Garante que o menu feche (boa prática de UX)
     fecharMenu();
-
-    // 3. Adiciona eventos aos novos elementos injetados (Formulário, etc.)
     adicionarEventos(); 
 }
 
@@ -70,15 +54,13 @@ function validarFormulario(form) {
     const interesses = form.querySelectorAll('input[name="interesse"]:checked');
     const fieldsetInteresses = document.getElementById('fieldset-interesses');
 
-    // 1. Validação de Consistência (Checkboxes: Deve haver pelo menos 1 selecionado)
     if (interesses.length === 0) {
         erros.push("Por favor, selecione pelo menos uma área de interesse de voluntariado.");
-        fieldsetInteresses.classList.add('erro-borda'); // Feedback visual
+        fieldsetInteresses.classList.add('erro-borda'); 
     } else {
         fieldsetInteresses.classList.remove('erro-borda');
     }
     
-    // 2. Validação de Consistência (CPF: Checa se é estritamente numérico)
     const cpfInput = form.querySelector('#cpf');
     const cpfValor = cpfInput.value;
     
@@ -86,9 +68,7 @@ function validarFormulario(form) {
         erros.push("O CPF deve conter apenas números (sem pontos ou traços).");
     }
     
-    // 3. EXIBIÇÃO DE FEEDBACK E SIMULAÇÃO DE ENVIO
     if (erros.length > 0) {
-        // Exibe a mensagem de erro formatada (Usando a classe CSS 'alert-error')
         const listaErros = erros.map(function(erro) { return '<li>' + erro + '</li>'; }).join('');
         
         feedbackDiv.innerHTML = `
@@ -98,15 +78,13 @@ function validarFormulario(form) {
             </div>
         `;
     } else {
-        // Simulação de Sucesso
         feedbackDiv.innerHTML = `
             <div class="alert alert-success">
                 Cadastro enviado com sucesso! Entraremos em contato em breve.
             </div>
         `;
-        form.reset(); // Limpa os campos
+        form.reset(); 
         
-        // Volta para a home após 3 segundos
         setTimeout(() => {
             window.location.hash = '#home'; 
         }, 3000);
@@ -114,37 +92,32 @@ function validarFormulario(form) {
 }
 
 
-// Liga eventos que SÃO INJETADOS no DOM (chamada após a injeção do template)
+// Liga eventos que SÃO INJETADOS no DOM
 function adicionarEventos() {
-    // Liga a submissão do formulário (o formulário é injetado, então precisa ser ligado aqui)
     const formCadastro = document.getElementById('form-cadastro');
     if (formCadastro) {
         formCadastro.addEventListener('submit', function(event) {
-            event.preventDefault(); // Impede o envio padrão da página
+            event.preventDefault(); 
             validarFormulario(formCadastro); 
         });
     }
 }
 
-// INICIALIZAÇÃO E LIGAÇÃO DE EVENTOS FIXOS (Executado apenas quando o HTML está pronto)
+// INICIALIZAÇÃO E LIGAÇÃO DE EVENTOS FIXOS (ÚNICA VEZ)
 document.addEventListener('DOMContentLoaded', function() {
-    
-    // 1. Liga o evento do botão FIXO uma única vez!
     const menuIcone = document.getElementById('menu-toggle'); 
     
     if (menuIcone) {
         menuIcone.addEventListener('click', toggleMenu);
     }
 
-    // 2. Inicialização do SPA e monitoramento de URL
     carregarConteudo(); 
     window.addEventListener('hashchange', carregarConteudo);
 });
 
 
 // =========================================================
-// 2. MÓDULO DE TEMPLATES (HTML como strings)
-//    NOTA: As tags <main> foram removidas para evitar duplicação no SPA.
+// 2. MÓDULO DE TEMPLATES (HTML como strings) - COMPLETO
 // =========================================================
 
 const TemplateHome = `

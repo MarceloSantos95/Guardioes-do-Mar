@@ -138,11 +138,11 @@ nav ul li a:hover::after {
     display: none;
 }
 
-/* MENU MOBILE ABERTO (PROBLEMA RESOLVIDO) */
+/* MENU MOBILE ABERTO (CORRIGIDO) */
 #menu-principal.menu-aberto {
     display: block;
     position: absolute;
-    top: 100%;
+    top: 100%; 
     left: 0;
     width: 100%;
     height: calc(100vh - 65px);
@@ -187,7 +187,7 @@ nav ul li a:hover::after {
 
 /* HERO BANNER - CORREÇÃO CRÍTICA DO CAMINHO ABSOLUTO */
 .hero-banner {
-    /* USE O NOME DO SEU REPOSITÓRIO AQUI */
+    /* CORRIGIDO: Use o nome do seu repositório aqui! */
     background-image: url('/Guardioes-do-Mar/assets/imagens/Tartaruga_Nadando.png'); 
     background-size: cover;
     background-position: center;
@@ -228,7 +228,7 @@ nav ul li a:hover::after {
     margin-bottom: var(--espacamento-lg);
 }
 
-/* RESTANTE DO CSS (3-8) */
+/* BOTÕES */
 .btn {
     padding: var(--espacamento-sm) var(--espacamento-lg);
     border-radius: 20px;
@@ -431,11 +431,6 @@ footer h2 {
 footer ul {
     list-style: none;
     margin-bottom: var(--espacamento-sm);
-}
-
-footer li {
-    font-size: var(--fonte-tamanho-pequeno);
-    line-height: 1.5;
 }
 
 footer a {
