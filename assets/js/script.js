@@ -1,3 +1,7 @@
+// =========================================================
+// 4. MÓDULO DE EVENTOS E UI (Interatividade - Funções Globais)
+// =========================================================
+
 function toggleMenu() {
     const navMenu = document.getElementById('menu-principal');
     const bodyElement = document.body;
@@ -35,7 +39,8 @@ function carregarConteudo() {
     const templateHTML = rotas[hash] || rotas['#home']; 
     
     if (appRoot) {
-        appRoot.innerHTML = templateHTML;
+        // CORRIGIDO: Injeta apenas o conteúdo (sem a tag <main> duplicada)
+        appRoot.innerHTML = `<main class="container">${templateHTML}</main>`;
     }
     
     fecharMenu();
@@ -117,7 +122,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 // =========================================================
-// 2. MÓDULO DE TEMPLATES (HTML como strings) - COMPLETO
+// 2. MÓDULO DE TEMPLATES (HTML como strings) - CORRIGIDO
 // =========================================================
 
 const TemplateHome = `
